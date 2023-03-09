@@ -9,6 +9,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
+
 @Configuration
 public class ApplicationConfiguration implements WebMvcConfigurer {
 
@@ -30,6 +32,9 @@ public class ApplicationConfiguration implements WebMvcConfigurer {
                 .requestMatchers("/**").authenticated()
                 .and()
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
+                .sessionManagement()
+                .sessionCreationPolicy(STATELESS)
+                .and()
                 .build();
     }
 
